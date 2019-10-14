@@ -1,21 +1,15 @@
-const knex = require("../db/knex");
-const posts = "posts";
+const knex = require('../db/knex');
+const posts = 'posts';
 module.exports = class Post {
-  constructor() {}
+	constructor() {}
 
-  static async fetchAll() {
-    const result = await knex
-      .select()
-      .from(posts)
-      .paginate(32, 1);
-    for (let i = 0; i < result.length; i++) {
-      const comments = await knex
-        .select()
-        .from("comments")
-        .where({ post_id: result[i].id });
+	static async fetchAll(page, count) {
+		const result = await knex.select().from(posts).paginate();
+		for (let i = 0; i < result.length; i++) {
+			const comments = await knex.select().from('comments').where({ post_id: result[i].id });
 
-      result[i].comments = comments;
-    }
-    return result;
-  }
+			result[i].comments = comments;
+		}
+		return result;
+	}
 };

@@ -1,7 +1,7 @@
-const Author = require("../models/author");
+const Author = require('../models/author');
 
 module.exports.fetchAll = async (req, res) => {
-  const authors = await Author.fetchAll();
+	const authors = await Author.fetchAll(req.query.page, req.query.count);
 
-  res.send(authors);
+	res.send(authors);
 };
