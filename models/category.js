@@ -7,4 +7,11 @@ module.exports = class Category {
 		const result = await knex.select().from(categories).paginate();
 		return result;
 	}
+
+	
+
+	static find(ob) {
+		const result = knex.select().from(categories).where(ob);
+		return result;
+	}
 };
