@@ -5,3 +5,8 @@ module.exports.fetchAll = async (req, res) => {
 
 	res.send(authors);
 };
+
+module.exports.findById = async (req, res) => {
+	const author = await Author.find(req.params.id);
+	res.send(author);
+};
