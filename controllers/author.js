@@ -1,12 +1,16 @@
-const Author = require('../models/author');
+const Author = require("../models/author");
 
 module.exports.fetchAll = async (req, res) => {
-	const authors = await Author.fetchAll(req.query.page, req.query.count);
+  const authors = await Author.fetchAll(req.query.page, req.query.count);
 
-	res.send(authors);
+  res.send(authors);
 };
 
 module.exports.findById = async (req, res) => {
-	const author = await Author.find(req.params.id);
-	res.send(author);
+  try {
+    const author = await Author.find({ id: req.params.id });
+  } catch (e) {
+    res.send(e);
+  }
+  res.send(author);
 };
